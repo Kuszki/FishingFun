@@ -54,7 +54,7 @@ namespace FishingFun
                     FishingEventHandler?.Invoke(this, new FishingEvent { Action = FishingAction.Cast });
                     WowProcess.PressKey(castKey);
 
-                    Watch(2000);
+                    Watch(3500);
 
                     WaitForBite();
                 }
@@ -158,6 +158,7 @@ namespace FishingFun
             {
                 logger.Info($"Ten Minute Key: Pressing key {key} to run a macro, delete junk fish or apply a lure etc.");
                 WowProcess.PressKey(key);
+                Thread.Sleep(3000);
             }
         }
 

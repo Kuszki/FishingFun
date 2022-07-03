@@ -52,7 +52,7 @@ namespace FishingFun
 
             cmbColors.ItemsSource = typeof(System.Windows.Media.Colors).GetProperties().Where(p => new List<string> { "Red", "Blue" }.Contains(p.Name));
             cmbColors.SelectedIndex = this.pixelClassifier.Mode==PixelClassifier.ClassifierMode.Blue?0: 1;
-            LootDelay.Value = WowProcess.LootDelay;
+            LootDelay.Value = (WowProcess.LootDelay_min + WowProcess.LootDelay_max) / 2;
         }
 
         private void RenderColour(bool renderMatchedArea)
@@ -138,7 +138,8 @@ namespace FishingFun
         }
         private void LootDelay_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
         {
-            WowProcess.LootDelay = (int)this.LootDelay.Value;
+            WowProcess.LootDelay_min = (int) (0.75 * this.LootDelay.Value);
+            WowProcess.LootDelay_max = (int) (1.25 * this.LootDelay.Value);
         }
 
         private void FindColour_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)

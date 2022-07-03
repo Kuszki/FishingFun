@@ -18,8 +18,9 @@ namespace FishingFun
         private const UInt32 WM_KEYUP = 0x0101;
         private static ConsoleKey lastKey;
         private static Random random = new Random();
-        public static int LootDelay=2000;
-
+        
+        public static int LootDelay_min = 1250;
+        public static int LootDelay_max = 1750;
 
         public static bool IsWowClassic()
         {
@@ -162,14 +163,14 @@ namespace FishingFun
                 mouse_event((int)MouseEventFlags.RightUp, position.X, position.Y, 0, 0);
                 var oldPosition = System.Windows.Forms.Cursor.Position;
 
-                Thread.Sleep(200);
+                Thread.Sleep(random.Next(175, 225));
                 System.Windows.Forms.Cursor.Position = position;
-                Thread.Sleep(LootDelay);
+                Thread.Sleep(random.Next(LootDelay_min, LootDelay_max));
                 mouse_event((int)MouseEventFlags.RightDown, position.X, position.Y, 0, 0);
-                Thread.Sleep(30 + random.Next(0, 47));
+                Thread.Sleep(random.Next(30, 75));
                 mouse_event((int)MouseEventFlags.RightUp, position.X, position.Y, 0, 0);
                 RefocusOnOldScreen(logger, activeProcess, wowProcess, oldPosition);
-                Thread.Sleep(LootDelay / 2);
+                Thread.Sleep(random.Next(LootDelay_min, LootDelay_max));
             }
         }
 

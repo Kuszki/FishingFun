@@ -22,7 +22,7 @@ namespace FishingFun
         private ReticleDrawer reticleDrawer = new ReticleDrawer();
 
         private FishingBot? bot;
-        private int strikeValue = 7; // this is the depth the bobber must go for the bite to be detected
+        private int strikeValue = 5; // this is the depth the bobber must go for the bite to be detected
         private bool setImageBackgroundColour = true;
         private Timer WindowSizeChangedTimer;
         private System.Threading.Thread? botThread;
@@ -36,7 +36,7 @@ namespace FishingFun
             this.DataContext = LogEntries = new ObservableCollection<LogEntry>();
             this.pixelClassifier = new PixelClassifier();
             pixelClassifier.SetConfiguration(WowProcess.IsWowClassic());
-             
+
             this.bobberFinder = new SearchBobberFinder(pixelClassifier);
 
             var imageProvider = bobberFinder as IImageProvider;
@@ -148,7 +148,6 @@ namespace FishingFun
         {
             if (bot == null)
             {
-                WowProcess.PressKey(ConsoleKey.Spacebar);
                 System.Threading.Thread.Sleep(1500);
 
                 SetButtonStates(false);
